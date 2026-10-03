@@ -1,0 +1,25 @@
+flowchart LR
+    A[Dim_Date] --> D[Fact_PerformanceReviews]
+    B[Dim_Department] --> D
+    C[Dim_Project] --> D
+    E[Dim_Employee] --> D
+
+    E -->|SCD Type 2| E1[employee_id, start_date, end_date, is_current]
+
+    subgraph Warehouse
+        A
+        B
+        C
+        E
+        D
+    end
+
+    subgraph OLTP
+        O1[Employees]
+        O2[Projects]
+        O3[Reviews]
+    end
+
+    O1 --> E
+    O2 --> C
+    O3 --> D

@@ -1,0 +1,53 @@
+erDiagram
+    DEPARTMENT ||--o{ EMPLOYEE : has
+    DEPARTMENT ||--o{ PROJECT : owns
+    EMPLOYEE ||--o{ REVIEW : receives
+    EMPLOYEE ||--o{ PROJECT_ASSIGNMENT : assigned_to
+    PROJECT ||--o{ PROJECT_ASSIGNMENT : contains
+
+    DEPARTMENT {
+        int department_id PK
+        varchar department_name
+        varchar location
+    }
+
+    EMPLOYEE {
+        int employee_id PK
+        varchar first_name
+        varchar last_name
+        varchar email
+        int department_id FK
+        varchar job_title
+        date hire_date
+        int manager_id FK
+        decimal salary
+        varchar status
+    }
+
+    PROJECT {
+        int project_id PK
+        varchar project_name
+        int department_id FK
+        decimal budget
+        date start_date
+        date end_date
+        varchar status
+    }
+
+    PROJECT_ASSIGNMENT {
+        int assignment_id PK
+        int employee_id FK
+        int project_id FK
+        decimal allocation_pct
+        date assigned_date
+    }
+
+    REVIEW {
+        int review_id PK
+        int employee_id FK
+        date review_date
+        int manager_id FK
+        decimal overall_score
+        varchar rating
+        text comments
+    }
